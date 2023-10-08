@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -144,7 +145,9 @@ namespace Listbox3_22_10
 
         private void guna2RatingStar1_ValueChanged(object sender, EventArgs e)
         {
-            label1.Text = guna2RatingStar1.Value.ToString();
+            //label1.Text = guna2RatingStar1.Value.ToString();
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            File.WriteAllText(path+"\\rating.txt", guna2RatingStar1.Value.ToString());
         }
     }
 }

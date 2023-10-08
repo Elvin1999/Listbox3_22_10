@@ -13,6 +13,8 @@ namespace Listbox3_22_10
     public partial class Form1 : Form
     {
         List<string> names = new List<string> { "Vuqar", "Ruad", "Ulvi" };
+        List<string> todos = new List<string> { "Write Code","Play Tennis",
+        "Read Book"};
         List<Car> cars = new List<Car>
         {
             new Car
@@ -34,6 +36,7 @@ namespace Listbox3_22_10
                 Year=2019
             }
         };
+        List<int> points = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
         public Form1()
         {
             InitializeComponent();
@@ -42,8 +45,10 @@ namespace Listbox3_22_10
             //listBox1.DataSource = names;
             //listBox1.SelectedIndex = 0;
 
-            listBox1.DataSource = cars;
-            listBox1.DisplayMember = nameof(Car.Vendor);
+            //listBox1.DataSource = cars;
+            //listBox1.DisplayMember = nameof(Car.Vendor);
+            comboBox1.DataSource = points;
+            checkedListBox1.Items.AddRange(todos.ToArray());
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -55,13 +60,16 @@ namespace Listbox3_22_10
             //if(item!=null)
             //label1.Text = item.ToString();
 
-            label1.Text = "";
-            var items=listBox1.SelectedItems;
-            foreach (var item in items)
-            {
-                var car = item as Car;
-                label1.Text += $"{car}\n";
-            }
+            //label1.Text = "";
+            //var items=listBox1.SelectedItems;
+            //foreach (var item in items)
+            //{
+            //    var car = item as Car;
+            //    label1.Text += $"{car}\n";
+            //}
+
+
+
 
         }
 
@@ -80,11 +88,63 @@ namespace Listbox3_22_10
 
         private void listBox1_DoubleClick(object sender, EventArgs e)
         {
-            var car = listBox1.SelectedItem as Car;
-            cars.Remove(car);
-            listBox1.DataSource=null;
-            listBox1.DataSource=cars;
-            listBox1.DisplayMember = nameof(Car.Vendor);
+            //var car = listBox1.SelectedItem as Car;
+            //cars.Remove(car);
+            //listBox1.DataSource=null;
+            //listBox1.DataSource=cars;
+            //listBox1.DisplayMember = nameof(Car.Vendor);
+
+
+            var item = listBox1.SelectedItem as Car;
+            listBox2.Items.Add(item);
+            cars.Remove(item);
+            listBox1.DataSource = null;
+            listBox1.DataSource = cars;
+        }
+
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var item = checkedListBox1.SelectedItem as string;
+            label1.Text = item;
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                var checkedItems = checkedListBox1.CheckedItems;
+                foreach (var checkedItem in checkedItems)
+                {
+                    todos.Remove(checkedItem as string);
+                }
+                checkedListBox1.Items.Clear();
+                checkedListBox1.Items.AddRange(todos.ToArray());
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+         //   MessageBox.Show($"You get {comboBox1.SelectedItem}");
+        }
+
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void guna2GradientCircleButton1_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void guna2RatingStar1_ValueChanged(object sender, EventArgs e)
+        {
+            label1.Text = guna2RatingStar1.Value.ToString();
         }
     }
 }
